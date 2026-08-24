@@ -6,6 +6,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.4.0] — 2026-08-24 · PROMPT-04: Frontend Completion
+
+### Added
+- **Showcase Page (`/showcase`)**: Added museum view fetching strictly `VAULT` status cards from Prisma.
+- **Wishlist / Bounty Board (`/wishlist`)**: Built a static grid outlining KSA trade targets with an integrated WhatsApp CTA for users to propose trades.
+- **About Page (`/about`)**: Created a trust-building page detailing the Team HAT mission and three core pillars (Local to KSA, 100% Verified, Community First).
+- Integrated all new routes dynamically into the `Header` component.
+
+---
+
+
 ## [0.3.2] — 2026-08-24 · BUGFIX-02: Next/Image Config & Hydration Completion
 
 ### Fixed
