@@ -1,9 +1,8 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LayoutDashboard, Package, Settings, LogOut, ExternalLink } from 'lucide-react';
 import PinWall from '@/components/admin/PinWall';
-import LogoutButton from '@/components/admin/LogoutButton';
+import AdminSidebar from '@/components/admin/AdminSidebar';
 
 export default async function AdminLayout({
   children,
@@ -58,67 +57,7 @@ export default async function AdminLayout({
           </div>
         </div>
 
-        {/* Nav Links */}
-        <nav style={{ flex: 1, padding: '24px 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Link
-            href="/admin"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '12px',
-              padding: '12px 16px', borderRadius: '8px',
-              color: 'var(--text-secondary)', textDecoration: 'none',
-              fontSize: '0.9rem', fontWeight: 500,
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <LayoutDashboard size={18} /> Overview
-          </Link>
-
-          <Link
-            href="/admin/inventory"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '12px',
-              padding: '12px 16px', borderRadius: '8px',
-              background: 'rgba(16, 185, 129, 0.1)',
-              color: 'var(--hat-green-400)', textDecoration: 'none',
-              fontSize: '0.9rem', fontWeight: 600,
-              border: '1px solid var(--border-subtle)'
-            }}
-          >
-            <Package size={18} /> Inventory
-          </Link>
-          
-          <Link
-            href="/admin/settings"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '12px',
-              padding: '12px 16px', borderRadius: '8px',
-              color: 'var(--text-secondary)', textDecoration: 'none',
-              fontSize: '0.9rem', fontWeight: 500,
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <Settings size={18} /> Settings
-          </Link>
-        </nav>
-
-        {/* Footer Actions */}
-        <div style={{ padding: '24px 16px', borderTop: '1px solid var(--border-subtle)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Link
-            href="/"
-            target="_blank"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '10px',
-              padding: '10px 16px', borderRadius: '8px',
-              color: 'var(--text-muted)', textDecoration: 'none',
-              fontSize: '0.85rem', fontWeight: 500,
-              transition: 'all 0.2s',
-            }}
-          >
-            <ExternalLink size={16} /> View Storefront
-          </Link>
-          
-          <LogoutButton />
-        </div>
+        <AdminSidebar />
       </aside>
 
       {/* ─── Main Content Area ─────────────────────────────────── */}

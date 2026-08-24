@@ -31,8 +31,8 @@ export default async function ShowcasePage() {
   const cards = await getVaultCards();
 
   return (
-    <div style={{ padding: '60px 0', minHeight: '80vh' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+    <div className="w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <header style={{ marginBottom: '40px', textAlign: 'center' }}>
           <h1 style={{ 
             fontFamily: "'Space Grotesk', sans-serif", 

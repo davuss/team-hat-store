@@ -41,8 +41,8 @@ export default function WishlistPage() {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
   return (
-    <div style={{ padding: '60px 0', minHeight: '80vh', background: 'var(--bg-base)' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+    <div className="w-full bg-[var(--bg-base)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         
         {/* Header Section */}
         <header style={{ textAlign: 'center', marginBottom: '60px' }}>
@@ -95,9 +95,7 @@ export default function WishlistPage() {
         </header>
 
         {/* Bounties Grid */}
-        <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px'
-        }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {BOUNTIES.map((bounty) => (
             <div key={bounty.id} style={{
               background: 'var(--bg-surface)',

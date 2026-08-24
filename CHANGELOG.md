@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.4.3] — 2026-08-24 · BUGFIX-05: Responsive Polish & Admin Routing
+
+### Fixed
+- Extracted the Admin navigation into a new `<AdminSidebar />` Client Component to accurately reflect active routing states (`usePathname`).
+- Removed excessive hardcoded vertical margins and heights from `/vault`, `/showcase`, `/wishlist`, and `/about` pages, closing the massive gaps between content blocks.
+- Standardized the global layout containers using Tailwind (`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full`) and grid constraints to ensure proper scaling on ultra-wide monitors.
+
+---
+
+
 ## [0.4.2] — 2026-08-24 · BUGFIX-04: Global Spacing & Header Overlap
 
 ### Fixed

@@ -39,23 +39,16 @@ export default async function VaultPage() {
 
   return (
     <>
-      <div
-        style={{
-          minHeight: '100vh',
-          background: 'var(--bg-base)',
-          paddingTop: '88px',
-          transition: 'background 0.25s ease',
-        }}
-      >
+      <div className="w-full">
         {/* ─── Page Header ─────────────────────────────────────── */}
         <div
           style={{
             background: 'var(--bg-surface)',
             borderBottom: '1px solid var(--border-subtle)',
-            padding: '36px 24px 28px',
+            padding: '36px 0 28px',
           }}
         >
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             {/* Breadcrumb */}
             <nav aria-label="Breadcrumb" style={{ marginBottom: '12px' }}>
               <ol
@@ -161,13 +154,7 @@ export default async function VaultPage() {
         </div>
 
         {/* ─── Main Content ─────────────────────────────────────── */}
-        <div
-          style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            padding: '36px 24px 80px',
-          }}
-        >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" style={{ padding: '36px 0 80px' }}>
           <VaultGrid cards={cards} />
         </div>
       </div>

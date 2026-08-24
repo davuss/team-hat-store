@@ -187,11 +187,7 @@ export default function VaultGrid({ cards }: VaultGridProps) {
       ) : (
         <div
           id="vault-card-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-            gap: '20px',
-          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {filtered.map((card) => (
             <VaultCard key={card.id} card={card} />

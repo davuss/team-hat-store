@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div style={{ padding: '60px 0', minHeight: '80vh', background: 'var(--bg-base)' }}>
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px' }}>
+    <div className="w-full bg-[var(--bg-base)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         
         {/* Hero Section */}
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
