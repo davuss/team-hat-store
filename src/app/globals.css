@@ -1,0 +1,313 @@
+/* ============================================================
+   TEAM HAT CARDHOUSE — Global Styles
+   PROMPT-01: Design tokens, base styles, Tailwind v4 theme
+   ============================================================ */
+
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ─── Team HAT Design Tokens ────────────────────────────────── */
+:root {
+  /* Brand greens */
+  --hat-green-950: #022c22;
+  --hat-green-900: #064e3b;
+  --hat-green-800: #065f46;
+  --hat-green-700: #047857;
+  --hat-green-500: #10b981;
+  --hat-green-400: #34d399;
+  --hat-green-300: #6ee7b7;
+
+  /* Gold / Amber accents (rare pulls) */
+  --hat-gold-500: #f59e0b;
+  --hat-gold-400: #fbbf24;
+  --hat-gold-300: #fcd34d;
+
+  /* Dark slate backgrounds */
+  --hat-slate-950: #020617;
+  --hat-slate-900: #0f172a;
+  --hat-slate-800: #1e293b;
+  --hat-slate-700: #334155;
+  --hat-slate-600: #475569;
+  --hat-slate-400: #94a3b8;
+  --hat-slate-300: #cbd5e1;
+  --hat-slate-100: #f1f5f9;
+
+  /* Functional */
+  --background: var(--hat-slate-950);
+  --foreground: var(--hat-slate-100);
+  --card-border: rgba(6, 78, 59, 0.4);
+  --glow-green: rgba(16, 185, 129, 0.15);
+  --glow-gold: rgba(251, 191, 36, 0.15);
+}
+
+/* ─── Tailwind v4 Theme Extension ───────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-hat-green-950: var(--hat-green-950);
+  --color-hat-green-900: var(--hat-green-900);
+  --color-hat-green-800: var(--hat-green-800);
+  --color-hat-green-700: var(--hat-green-700);
+  --color-hat-green-500: var(--hat-green-500);
+  --color-hat-green-400: var(--hat-green-400);
+  --color-hat-green-300: var(--hat-green-300);
+  --color-hat-gold-500: var(--hat-gold-500);
+  --color-hat-gold-400: var(--hat-gold-400);
+  --color-hat-gold-300: var(--hat-gold-300);
+  --color-hat-slate-950: var(--hat-slate-950);
+  --color-hat-slate-900: var(--hat-slate-900);
+  --color-hat-slate-800: var(--hat-slate-800);
+  --color-hat-slate-700: var(--hat-slate-700);
+  --color-hat-slate-600: var(--hat-slate-600);
+  --color-hat-slate-400: var(--hat-slate-400);
+  --color-hat-slate-300: var(--hat-slate-300);
+  --color-hat-slate-100: var(--hat-slate-100);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Base Styles ────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--hat-slate-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hat-green-800);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hat-green-700);
+}
+
+/* ─── Utility Classes ────────────────────────────────────────── */
+
+/* Glassmorphism card surface */
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+
+/* Emerald glow effect */
+.glow-green {
+  box-shadow: 0 0 30px var(--glow-green), 0 0 60px var(--glow-green);
+}
+
+/* Gold glow for rare items */
+.glow-gold {
+  box-shadow: 0 0 30px var(--glow-gold), 0 0 60px var(--glow-gold);
+}
+
+/* Gradient text */
+.gradient-text-green {
+  background: linear-gradient(135deg, var(--hat-green-400), var(--hat-green-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, var(--hat-gold-400), var(--hat-gold-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated gradient border */
+.border-gradient {
+  position: relative;
+  background: linear-gradient(var(--hat-slate-800), var(--hat-slate-800)) padding-box,
+              linear-gradient(135deg, var(--hat-green-700), var(--hat-gold-500), var(--hat-green-700)) border-box;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-green);
+}
+
+/* Shine sweep animation */
+@keyframes shine-sweep {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+
+.shine-on-hover {
+  position: relative;
+  overflow: hidden;
+}
+.shine-on-hover::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  transition: none;
+}
+.shine-on-hover:hover::after {
+  animation: shine-sweep 0.6s ease forwards;
+}
+
+/* Pulse dot (live badge) */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 1; }
+  80%, 100% { transform: scale(2); opacity: 0; }
+}
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--hat-green-500);
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Floating animation for hero elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%  { transform: translateY(-12px) rotate(1deg); }
+  66%  { transform: translateY(-6px) rotate(-1deg); }
+}
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+.float-animation-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+.float-animation-slow {
+  animation: float 8s ease-in-out 1s infinite;
+}
+
+/* Gradient backgrounds */
+.bg-hat-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--hat-slate-950) 0%,
+    var(--hat-green-950) 50%,
+    var(--hat-slate-950) 100%
+  );
+}
+
+.bg-hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(6,78,59,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(251,191,36,0.05) 0%, transparent 50%),
+    var(--hat-slate-950);
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+/* Nav link underline animation */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--hat-green-500), var(--hat-gold-400));
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Button styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--hat-green-700), var(--hat-green-500));
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--hat-green-800), var(--hat-green-700));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 28px;
+  background: transparent;
+  color: var(--hat-slate-300);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--hat-slate-700);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.btn-secondary:hover {
+  border-color: var(--hat-green-700);
+  color: var(--hat-green-400);
+  background: rgba(6, 78, 59, 0.15);
+  transform: translateY(-1px);
+}

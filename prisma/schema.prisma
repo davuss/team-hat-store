@@ -1,0 +1,99 @@
+// ============================================================
+// TEAM HAT CARDHOUSE — Prisma Schema
+// PROMPT-01: Initial schema definition
+// SQLite provider (portable to PostgreSQL/Supabase later)
+// NOTE: SQLite does not support native enums in Prisma.
+//       Use String fields + TypeScript union types (src/types/card.ts)
+// ============================================================
+
+generator client {
+  provider = "prisma-client"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  // NOTE: url moved to prisma.config.ts (Prisma 7 requirement)
+}
+
+// ============================================================
+// CARD MODEL
+// ============================================================
+model Card {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+
+  // Game: "Pokemon" | "OnePiece" | "Lorcana" | "Topps" | "Riftbound" | "Merch"
+  game       String   @default("Pokemon")
+
+  // Card metadata
+  setName    String   @default("")
+  cardNumber String   @default("")
+  rarity     String   @default("")
+
+  // Finish: "Normal" | "Holo" | "Textured" | "Foil" | "ReverseHolo" | "FullArt" | "AlternateArt"
+  finish     String   @default("Normal")
+
+  // Condition: "NM" | "LP" | "MP" | "Graded"
+  condition  String   @default("NM")
+
+  // Language: "English" | "Japanese" | "Arabic"
+  language   String   @default("English")
+
+  // Pricing & Stock
+  priceSar   Decimal  @default(0)
+  stockQty   Int      @default(1)
+
+  // Status: "AVAILABLE" | "TRADE_ONLY" | "VAULT" | "ARCHIVED"
+  status     String   @default("AVAILABLE")
+
+  // Media
+  imageUrl   String   @default("")
+
+  // Flags
+  isFeatured Boolean  @default(false)
+
+  // Timestamps
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("cards")
+}
+
+// ============================================================
+// USER MODEL (future auth / referral hooks)
+// ============================================================
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String?
+  referralCode    String?  @unique
+  discountPercent Decimal  @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("users")
+}
+
+// ============================================================
+// SYSTEM CONFIG MODEL
+// Key-value store for runtime toggles (VAT, packaging, referrals)
+//
+// Default records (seeded):
+//   vat_enabled          = "false"
+//   vat_rate             = "0.15"
+//   toploader_upgrade    = "true"
+//   toploader_fee_sar    = "2.00"
+//   referral_enabled     = "false"
+//   referral_discount    = "0.10"
+// ============================================================
+model SystemConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("system_configs")
+}
