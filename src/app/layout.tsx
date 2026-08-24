@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
+import ThemeProvider from '@/components/ThemeProvider';
+import CartSheet from '@/components/CartSheet';
 
 export const metadata: Metadata = {
   title: {
@@ -30,45 +32,38 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://store.team-hat.org'),
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
-        <Header />
-        <main id="main-content" role="main">
-          {children}
-        </main>
-        <footer
-          id="site-footer"
-          role="contentinfo"
-          style={{
-            borderTop: '1px solid rgba(6,78,59,0.3)',
-            background: '#020617',
-            padding: '32px 24px',
-            textAlign: 'center',
-          }}
-        >
-          <p
+        <ThemeProvider>
+          <Header />
+          <CartSheet />
+          <main id="main-content" role="main">
+            {children}
+          </main>
+          <footer
+            id="site-footer"
+            role="contentinfo"
             style={{
-              color: '#475569',
-              fontSize: '0.85rem',
-              margin: 0,
+              borderTop: '1px solid var(--border-subtle)',
+              background: 'var(--bg-base)',
+              padding: '32px 24px',
+              textAlign: 'center',
+              transition: 'background 0.25s ease, border-color 0.25s ease',
             }}
           >
-            © {new Date().getFullYear()}{' '}
-            <span style={{ color: '#34d399', fontWeight: 600 }}>Team HAT</span>
-            {' '}— All inventory prices in Saudi Riyal (SAR). For inquiries, contact us on socials.
-          </p>
-        </footer>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>
+              © {new Date().getFullYear()}{' '}
+              <span style={{ color: 'var(--hat-green-400)', fontWeight: 600 }}>Team HAT</span>
+              {' '}— All inventory prices in Saudi Riyal (SAR). For inquiries, contact us on socials.
+            </p>
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

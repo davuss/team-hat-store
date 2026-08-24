@@ -42,10 +42,10 @@ export default function HeroSection() {
         paddingTop: '100px',
         paddingBottom: '80px',
         background: `
-          radial-gradient(ellipse 80% 50% at 50% -10%, rgba(6,78,59,0.45) 0%, transparent 65%),
-          radial-gradient(ellipse 50% 40% at 85% 60%, rgba(251,191,36,0.06) 0%, transparent 50%),
-          radial-gradient(ellipse 40% 30% at 15% 70%, rgba(16,185,129,0.08) 0%, transparent 50%),
-          #020617
+          radial-gradient(ellipse 80% 50% at 50% -10%, var(--hero-glow) 0%, transparent 65%),
+          radial-gradient(ellipse 50% 40% at 85% 60%, rgba(251,191,36,0.05) 0%, transparent 50%),
+          radial-gradient(ellipse 40% 30% at 15% 70%, rgba(16,185,129,0.06) 0%, transparent 50%),
+          var(--bg-base)
         `,
       }}
     >
@@ -310,8 +310,8 @@ export default function HeroSection() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
             gap: '1px',
-            background: 'rgba(6,78,59,0.25)',
-            border: '1px solid rgba(6,78,59,0.4)',
+            background: 'var(--border-default)',
+            border: '1px solid var(--border-default)',
             borderRadius: '14px',
             overflow: 'hidden',
             backdropFilter: 'blur(12px)',
@@ -327,14 +327,14 @@ export default function HeroSection() {
                 justifyContent: 'center',
                 gap: '8px',
                 padding: '24px 20px',
-                background: 'rgba(2,6,23,0.6)',
+                background: 'var(--bg-card)',
                 transition: 'background 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(6,78,59,0.25)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(2,6,23,0.6)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)';
               }}
             >
               <Icon size={22} color="#10b981" strokeWidth={2} />

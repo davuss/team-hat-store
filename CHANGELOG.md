@@ -6,6 +6,52 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.2.0] — 2026-08-24 · PROMPT-02: Theme Engine, Vault Catalog, & WhatsApp Router
+
+### Added
+- **`next-themes` + `ThemeProvider`** (`src/components/ThemeProvider.tsx`)
+  - Dual-theme system: Dark Mode (black `#000` / emerald green) and Light Mode (white `#fff` / emerald green)
+  - `data-theme` attribute on `<html>` drives all CSS vars
+  - Persistent theme preference via localStorage
+- **`zustand` Trade Binder (Cart)** (`src/store/cartStore.ts`)
+  - Global cart state with `persist` middleware (survives page refreshes)
+  - `addItem`, `removeItem`, `clearCart`, `hasItem`, `totalSar`, `itemCount`
+  - `buildWhatsAppUrl()` utility: formats full card list proposal message
+- **`CartSheet`** slide-out binder panel (`src/components/CartSheet.tsx`)
+  - Slide-in from right with backdrop blur
+  - Card thumbnails, individual remove buttons, clear-all, empty state
+  - WhatsApp proposal button with fully formatted `wa.me/966XXXXXXXXX` URL
+  - Total SAR displayed prominently; mounted globally in root layout
+- **`VaultCard`** component (`src/components/VaultCard.tsx`)
+  - Card image with fallback game emoji, featured badge, vault overlay
+  - Status badges: AVAILABLE (green), TRADE_ONLY (amber), VAULT (purple)
+  - Condition / finish / language chip tags
+  - Add-to-binder toggle button (tracks in-cart state)
+- **`VaultGrid`** client filter component (`src/components/VaultGrid.tsx`)
+  - Game filter tab bar with live counts per category
+  - Animated active state pill; live result count with `aria-live`
+  - Empty state with "show all" reset button
+- **`/vault` page** (`src/app/vault/page.tsx`)
+  - Server component — fetches all non-ARCHIVED cards from Prisma
+  - Page header with breadcrumb, status summary chips, description
+  - `force-dynamic` to ensure fresh DB reads per request
+
+### Changed
+- **`globals.css`** — Complete rewrite for dual-theme support
+  - All surfaces/borders/text now use `--bg-*`, `--text-*`, `--border-*` CSS vars
+  - Dark: `--bg-base: #000000`, Light: `--bg-base: #ffffff`
+  - Added `slide-in-right`, `fade-in`, `cart-bounce` keyframes
+  - Removed hardcoded `#020617` slate references from utility classes
+- **`Header.tsx`** — Major update
+  - **Logo**: Replaced ShoppingBag icon placeholder with `<Image src="/TeamHatHighRes2NoBG.png" />` (48×56)
+  - **Theme Toggle**: Sun/Moon button using `useTheme` from next-themes
+  - **Cart Button**: Shows cart count badge, opens slide-out binder
+  - All inline colors replaced with CSS vars (`var(--nav-link)`, `var(--bg-elevated)`, etc.)
+- **`layout.tsx`** — Added `ThemeProvider` wrapper and global `CartSheet` mount
+- **`HeroSection.tsx`** — Background and stats bar now use `var(--bg-base)` and `var(--bg-card)` for theme compatibility
+
+---
+
 ## [0.1.0] — 2026-08-24 · PROMPT-01: Project Initialization & Core Architecture
 
 ### Added
