@@ -6,6 +6,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.4.2] — 2026-08-24 · BUGFIX-04: Global Spacing & Header Overlap
+
+### Fixed
+- Fixed layout overlap where the fixed `Header` collided with page content by adding global `pt-24 pb-12` spacing to the `<main>` tag in `src/app/layout.tsx`.
+
+---
+
+
 ## [0.4.1] — 2026-08-24 · BUGFIX-03: Business Logic & Wishlist Crash
 
 ### Fixed

@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <Header />
           <CartSheet />
-          <main id="main-content" role="main">
+          <main id="main-content" role="main" className="min-h-screen pt-24 pb-12">
             {children}
           </main>
           <footer
