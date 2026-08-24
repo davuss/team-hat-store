@@ -6,6 +6,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.3.2] — 2026-08-24 · BUGFIX-02: Next/Image Config & Hydration Completion
+
+### Fixed
+- Whitelisted image domains (`placehold.co`, `images.pokemontcg.io`, `en.onepiece-cardgame.com`, `sixfortyfive.com`) and enabled `dangerouslyAllowSVG` in `next.config.ts` to fix image rendering crashes.
+- Completed Next.js hydration bugfix by adding `suppressHydrationWarning` to the `<body>` tag in `src/app/layout.tsx`.
+
+---
+
+
 ## [0.3.1] — 2026-08-24 · BUGFIX-01: React Client Boundary Fixes
 
 ### Fixed
