@@ -41,3 +41,19 @@ export async function updateDynamicConfig(key: 'config_games' | 'config_conditio
   // Revalidate everything since configs affect global UI
   revalidatePath('/', 'layout');
 }
+
+export async function getStoreConfig(key: string) {
+  const config = await prisma.systemConfig.findUnique({
+    where: { key },
+  });
+  return config?.value || '';
+}
+
+export async function updateStoreConfig(key: string, value: string) {
+  await prisma.systemConfig.upsert({
+    where: { key },
+    update: { value },
+    create: { key, value },
+  });
+  revalidatePath('/', 'layout');
+}

@@ -1,14 +1,25 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { X, Trash2, MessageCircle, ShoppingBag, ArrowRight, Package } from 'lucide-react';
 import { useCartStore, buildWhatsAppUrl } from '@/store/cartStore';
+import { getStoreConfig } from '@/app/actions/config';
 
 export default function CartSheet() {
   const { items, isOpen, closeCart, removeItem, clearCart, totalSar, itemCount } = useCartStore();
+  const [whatsappNumber, setWhatsappNumber] = useState<string>('+966000000000');
   const total = totalSar();
   const count = itemCount();
+
+  // Fetch dynamic whatsapp number
+  useEffect(() => {
+    if (isOpen) {
+      getStoreConfig('config_whatsapp').then(num => {
+        if (num) setWhatsappNumber(num);
+      });
+    }
+  }, [isOpen]);
 
   // Close on Escape key
   useEffect(() => {
@@ -372,7 +383,7 @@ export default function CartSheet() {
             {/* WhatsApp CTA */}
             <a
               id="whatsapp-proposal-btn"
-              href={buildWhatsAppUrl(items)}
+              href={buildWhatsAppUrl(items, whatsappNumber)}
               target="_blank"
               rel="noopener noreferrer"
               style={{

@@ -70,9 +70,7 @@ export const useCartStore = create<CartStore>()(
 );
 
 // ─── WhatsApp URL builder ─────────────────────────────────────
-const WHATSAPP_NUMBER = '966XXXXXXXXX'; // TODO: link to SystemConfig in future prompt
-
-export function buildWhatsAppUrl(items: CartCard[]): string {
+export function buildWhatsAppUrl(items: CartCard[], whatsappNumber: string): string {
   if (items.length === 0) return '#';
 
   const total = items.reduce((sum, i) => sum + i.priceSar, 0);
@@ -91,5 +89,8 @@ export function buildWhatsAppUrl(items: CartCard[]): string {
     `store.team-hat.org`,
   ].join('\n');
 
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  // Strip spaces, dashes, plus signs, or any non-digit characters to ensure wa.me link is valid
+  const sanitizedNumber = whatsappNumber.replace(/\D/g, '');
+
+  return `https://wa.me/${sanitizedNumber}?text=${encodeURIComponent(message)}`;
 }

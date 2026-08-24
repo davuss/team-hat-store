@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.7.0] — 2026-08-24 · PROMPT-07: The Communication Switchboard
+
+### Added
+- **Dynamic WhatsApp Routing**: Integrated the store's WhatsApp number into the `SystemConfig` model (`config_whatsapp`).
+- **Store Contact Settings**: Expanded the `/admin/settings` dashboard to include a "Store Contact Details" section for updating the WhatsApp number.
+- **Sanitized Checkout URLs**: Refactored the Cart Store's `buildWhatsAppUrl` generator to fetch the dynamic number and sanitize it (stripping spaces, dashes, etc.) to ensure valid `wa.me` links.
+
+---
+
+
 ## [0.6.0] — 2026-08-24 · PROMPT-06: Dynamic System Settings & Wardrobe Migration
 
 ### Added

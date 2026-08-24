@@ -1,21 +1,26 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getDynamicConfigs, updateDynamicConfig } from '@/app/actions/config';
-import { Plus, Trash2, Save, Loader2 } from 'lucide-react';
+import { getDynamicConfigs, updateDynamicConfig, getStoreConfig, updateStoreConfig } from '@/app/actions/config';
+import { Plus, Trash2, Save, Loader2, Phone } from 'lucide-react';
 
 export default function SettingsPage() {
   const [games, setGames] = useState<string[]>([]);
   const [conditions, setConditions] = useState<string[]>([]);
   const [finishes, setFinishes] = useState<string[]>([]);
+  const [whatsapp, setWhatsapp] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    getDynamicConfigs().then((data) => {
-      setGames(data.games);
-      setConditions(data.conditions);
-      setFinishes(data.finishes);
+    Promise.all([
+      getDynamicConfigs(),
+      getStoreConfig('config_whatsapp')
+    ]).then(([dynamicData, waData]) => {
+      setGames(dynamicData.games);
+      setConditions(dynamicData.conditions);
+      setFinishes(dynamicData.finishes);
+      setWhatsapp(waData);
       setLoading(false);
     });
   }, []);
@@ -26,6 +31,7 @@ export default function SettingsPage() {
       updateDynamicConfig('config_games', games),
       updateDynamicConfig('config_conditions', conditions),
       updateDynamicConfig('config_finishes', finishes),
+      updateStoreConfig('config_whatsapp', whatsapp),
     ]);
     setSaving(false);
   };
@@ -49,7 +55,24 @@ export default function SettingsPage() {
         </button>
       </div>
 
-      <div className="grid gap-8">
+      <div className="grid gap-8 mt-8">
+        {/* Store Contact Details */}
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-6">
+          <h2 className="text-lg font-semibold text-[var(--text-secondary)] mb-4 flex items-center gap-2">
+            <Phone size={18} /> Store Contact Details
+          </h2>
+          <div className="max-w-md">
+            <label className="block text-sm font-medium text-[var(--text-muted)] mb-2">WhatsApp Number (incl. country code)</label>
+            <input
+              type="text"
+              value={whatsapp}
+              onChange={(e) => setWhatsapp(e.target.value)}
+              placeholder="+966000000000"
+              className="w-full bg-[var(--bg-base)] border border-[var(--border-default)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-emerald-500 transition-colors"
+            />
+          </div>
+        </div>
+
         <ConfigSection title="Game Categories" items={games} setItems={setGames} placeholder="e.g. Flesh & Blood" />
         <ConfigSection title="Card Conditions" items={conditions} setItems={setConditions} placeholder="e.g. Played" />
         <ConfigSection title="Foil & Finishes" items={finishes} setItems={setFinishes} placeholder="e.g. Cold Foil" />

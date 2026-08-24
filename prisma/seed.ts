@@ -35,6 +35,7 @@ async function main() {
     { key: 'toploader_fee_sar', value: '2.00'  },
     { key: 'referral_enabled',  value: 'false' },
     { key: 'referral_discount', value: '0.10'  },
+    { key: 'config_whatsapp',   value: '+966000000000' },
     { key: 'config_games',      value: JSON.stringify(['Pokémon', 'One Piece', 'Disney Lorcana', 'Topps', 'Riftbound', 'Merch']) },
     { key: 'config_conditions', value: JSON.stringify(['Mint', 'Near Mint (NM)', 'Lightly Played (LP)', 'Moderately Played (MP)', 'Graded']) },
     { key: 'config_finishes',   value: JSON.stringify(['Normal', 'Holo', 'Reverse Holo', 'Textured', 'Full Art']) },
