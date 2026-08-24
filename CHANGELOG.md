@@ -6,6 +6,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.4.1] — 2026-08-24 · BUGFIX-03: Business Logic & Wishlist Crash
+
+### Fixed
+- Fixed `/vault` business logic by explicitly querying only `AVAILABLE` and `TRADE_ONLY` items, successfully hiding `VAULT` items from the main storefront.
+- Fixed hydration and event handler boundary crashes on the `/wishlist` page by moving it to a Client Component (`"use client";`) and extracting its SEO metadata into a separate `layout.tsx`.
+
+---
+
+
 ## [0.4.0] — 2026-08-24 · PROMPT-04: Frontend Completion
 
 ### Added

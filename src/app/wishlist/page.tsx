@@ -1,11 +1,9 @@
+'use client';
+
 import type { Metadata } from 'next';
 import { Target, Search, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
-export const metadata: Metadata = {
-  title: 'Bounty Board | Team HAT',
-  description: 'The Wishlist & Bounty Board. Cards we are actively looking to buy or trade for in KSA.',
-};
 
 const BOUNTIES = [
   {

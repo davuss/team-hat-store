@@ -15,7 +15,7 @@ export const dynamic = 'force-dynamic';
 async function getCards() {
   const cards = await prisma.card.findMany({
     where: {
-      status: { not: 'ARCHIVED' },
+      status: { in: ['AVAILABLE', 'TRADE_ONLY'] },
     },
     orderBy: [
       { isFeatured: 'desc' },
