@@ -6,6 +6,30 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.3.0] — 2026-08-24 · PROMPT-03: Admin Control Room & Inventory GUI
+
+### Added
+- **Admin Security (PIN Wall)**
+  - Created `PinWall` client component (`src/components/admin/PinWall.tsx`)
+  - Server-side layout protection in `src/app/admin/layout.tsx` using `next/headers` cookies
+  - Auth API route `src/app/api/auth/pin/route.ts` validating against `ADMIN_PIN` in `.env.local`
+- **Dashboard Overview (`/admin`)**
+  - High-level KPIs driven by Prisma aggregations: Total Value, Total Listed, Available, Vaulted
+- **Inventory Manager (`/admin/inventory`)**
+  - Server page fetching all cards (including archived)
+  - `InventoryDataTable` client component with fast client-side searching
+  - Inline Action buttons (Edit, Delete)
+- **Card Editor & Image Upload**
+  - `CardEditorSheet` slide-out form for creating/updating cards
+  - Enum integration for Game, Status, Condition, Finish, Language
+  - Local Image Upload API (`src/app/api/upload/route.ts`) saving to `/public/uploads/cards/`
+  - Complete REST CRUD API for cards (`src/app/api/cards/route.ts` & `[id]/route.ts`)
+
+### Fixed
+- Fixed CSS build error: Moved `@import url(...)` for Google Fonts to line 1 of `globals.css` above all other CSS rules.
+
+---
+
 ## [0.2.0] — 2026-08-24 · PROMPT-02: Theme Engine, Vault Catalog, & WhatsApp Router
 
 ### Added
