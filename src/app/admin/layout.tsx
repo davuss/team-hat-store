@@ -69,14 +69,6 @@ export default async function AdminLayout({
               fontSize: '0.9rem', fontWeight: 500,
               transition: 'all 0.2s ease',
             }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-              (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'transparent';
-              (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-            }}
           >
             <LayoutDashboard size={18} /> Overview
           </Link>
@@ -104,14 +96,6 @@ export default async function AdminLayout({
               fontSize: '0.9rem', fontWeight: 500,
               transition: 'all 0.2s ease',
             }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-              (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'transparent';
-              (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-            }}
           >
             <Settings size={18} /> Settings
           </Link>
@@ -129,8 +113,6 @@ export default async function AdminLayout({
               fontSize: '0.85rem', fontWeight: 500,
               transition: 'all 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'}
-            onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)'}
           >
             <ExternalLink size={16} /> View Storefront
           </Link>

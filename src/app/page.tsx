@@ -1,3 +1,5 @@
+'use client';
+
 import HeroSection from '@/components/HeroSection';
 import { Layers, Eye, Heart, ArrowRight } from 'lucide-react';
 

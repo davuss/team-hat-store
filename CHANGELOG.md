@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.3.1] — 2026-08-24 · BUGFIX-01: React Client Boundary Fixes
+
+### Fixed
+- Fixed Next.js hydration error caused by `next-themes` by adding `suppressHydrationWarning` to the root `<html>` tag in `src/app/layout.tsx`.
+- Resolved `Event handlers cannot be passed to Client Component props` error by removing interactive `onMouseEnter` and `onMouseLeave` properties from server components (`src/app/admin/layout.tsx`).
+- Added `"use client";` boundary directive to `src/app/page.tsx` since it utilizes interactive client-side hover states.
+
+---
+
+
 ## [0.3.0] — 2026-08-24 · PROMPT-03: Admin Control Room & Inventory GUI
 
 ### Added
