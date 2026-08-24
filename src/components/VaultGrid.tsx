@@ -4,13 +4,13 @@ import { useState } from 'react';
 import VaultCard from '@/components/VaultCard';
 import { GAMES, GAME_LABELS, type Game } from '@/types/card';
 
-const GAME_EMOJI: Record<Game, string> = {
-  Pokemon:   '⚡',
-  OnePiece:  '☠️',
-  Lorcana:   '✨',
-  Topps:     '⚽',
-  Riftbound: '⚔️',
-  Merch:     '🧢',
+const GAME_EMOJI: Record<string, string> = {
+  'Pokémon':        '⚡',
+  'One Piece':      '☠️',
+  'Disney Lorcana': '✨',
+  'Topps':          '⚽',
+  'Riftbound':      '⚔️',
+  'Merch':          '🧢',
 };
 
 interface VaultGridProps {
@@ -33,10 +33,8 @@ interface VaultGridProps {
   }[];
 }
 
-type FilterGame = 'ALL' | Game;
-
 export default function VaultGrid({ cards }: VaultGridProps) {
-  const [activeGame, setActiveGame] = useState<FilterGame>('ALL');
+  const [activeGame, setActiveGame] = useState<string>('ALL');
 
   const filtered = activeGame === 'ALL'
     ? cards
@@ -48,16 +46,16 @@ export default function VaultGrid({ cards }: VaultGridProps) {
     return acc;
   }, {});
 
-  const FILTER_OPTIONS: { key: FilterGame; label: string; emoji: string; count: number }[] = [
+  const dynamicGames = Object.keys(gameCounts).sort();
+
+  const FILTER_OPTIONS = [
     { key: 'ALL', label: 'All Cards', emoji: '🃏', count: cards.length },
-    ...GAMES
-      .filter((g) => gameCounts[g] > 0)
-      .map((g) => ({
-        key: g as FilterGame,
-        label: GAME_LABELS[g],
-        emoji: GAME_EMOJI[g],
-        count: gameCounts[g],
-      })),
+    ...dynamicGames.map((g) => ({
+      key: g,
+      label: g,
+      emoji: GAME_EMOJI[g] || '🃏',
+      count: gameCounts[g],
+    })),
   ];
 
   return (
@@ -67,19 +65,14 @@ export default function VaultGrid({ cards }: VaultGridProps) {
         id="vault-filter-bar"
         role="tablist"
         aria-label="Filter cards by game"
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '8px',
-          marginBottom: '32px',
-        }}
+        className="flex flex-wrap gap-2 mb-8"
       >
         {FILTER_OPTIONS.map(({ key, label, emoji, count }) => {
           const isActive = activeGame === key;
           return (
             <button
               key={key}
-              id={`filter-${key.toLowerCase()}`}
+              id={`filter-${key.toLowerCase().replace(/\s+/g, '-')}`}
               role="tab"
               aria-selected={isActive}
               onClick={() => setActiveGame(key)}
@@ -89,22 +82,19 @@ export default function VaultGrid({ cards }: VaultGridProps) {
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '9999px',
+                background: isActive ? 'rgba(16,185,129,0.1)' : 'transparent',
                 border: isActive
-                  ? '1px solid var(--hat-green-500)'
+                  ? '1px solid rgba(16,185,129,0.5)'
                   : '1px solid var(--border-default)',
-                background: isActive
-                  ? 'rgba(16,185,129,0.15)'
-                  : 'var(--bg-elevated)',
                 color: isActive ? 'var(--hat-green-400)' : 'var(--text-secondary)',
+                fontSize: '0.9rem',
+                fontWeight: isActive ? 600 : 500,
                 cursor: 'pointer',
-                fontSize: '0.82rem',
-                fontWeight: 600,
                 transition: 'all 0.2s ease',
-                letterSpacing: '0.01em',
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
+                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--text-muted)';
                   (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
                 }
               }}

@@ -17,10 +17,10 @@ export const GAMES = [
 
 export type Game = (typeof GAMES)[number];
 
-export const GAME_LABELS: Record<Game, string> = {
-  Pokemon: 'Pokémon',
-  OnePiece: 'One Piece',
-  Lorcana: 'Disney Lorcana',
+export const GAME_LABELS: Record<string, string> = {
+  Pokémon: 'Pokémon',
+  'One Piece': 'One Piece',
+  'Disney Lorcana': 'Disney Lorcana',
   Topps: 'Topps Premier League',
   Riftbound: 'LoL Riftbound',
   Merch: 'Team HAT Merch',
@@ -55,10 +55,11 @@ export const CONDITIONS = ['NM', 'LP', 'MP', 'Graded'] as const;
 
 export type Condition = (typeof CONDITIONS)[number];
 
-export const CONDITION_LABELS: Record<Condition, string> = {
-  NM:     'Near Mint (NM)',
-  LP:     'Lightly Played (LP)',
-  MP:     'Moderately Played (MP)',
+export const CONDITION_LABELS: Record<string, string> = {
+  Mint: 'Mint',
+  'Near Mint (NM)': 'Near Mint (NM)',
+  'Lightly Played (LP)': 'Lightly Played (LP)',
+  'Moderately Played (MP)': 'Moderately Played (MP)',
   Graded: 'Graded (PSA/BGS)',
 };
 
@@ -80,14 +81,14 @@ export const FINISHES = [
 
 export type Finish = (typeof FINISHES)[number];
 
-export const FINISH_LABELS: Record<Finish, string> = {
+export const FINISH_LABELS: Record<string, string> = {
   Normal:       'Normal',
   Holo:         'Holo',
   Textured:     'Textured',
   Foil:         'Foil',
-  ReverseHolo:  'Reverse Holo',
-  FullArt:      'Full Art',
-  AlternateArt: 'Alternate Art',
+  'Reverse Holo': 'Reverse Holo',
+  'Full Art':     'Full Art',
+  'Alternate Art': 'Alternate Art',
 };
 
 // ─── Card (full model type) ───────────────────────────────────
@@ -95,13 +96,13 @@ export interface Card {
   id:         string;
   slug:       string;
   title:      string;
-  game:       Game;
+  game:       string;
   setName:    string;
   cardNumber: string;
   rarity:     string;
-  finish:     Finish;
-  condition:  Condition;
-  language:   Language;
+  finish:     string;
+  condition:  string;
+  language:   string;
   priceSar:   number;
   stockQty:   number;
   status:     CardStatus;

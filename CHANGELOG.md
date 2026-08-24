@@ -6,6 +6,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.6.0] — 2026-08-24 · PROMPT-06: Dynamic System Settings & Wardrobe Migration
+
+### Added
+- **Dynamic Configuration Model**: Migrated `GAMES`, `CONDITIONS`, and `FINISHES` from hardcoded TypeScript enums to a database-driven `SystemConfig` JSON array model.
+- **Admin Settings UI (`/admin/settings`)**: Built an interactive dashboard where admins can visually add and remove categories, rendering updates to the entire platform instantly.
+- **Dynamic Forms**: Refactored `CardEditorSheet.tsx` to read its dropdown options dynamically from the database.
+
+### Changed
+- Seed script (`prisma/seed.ts`) now injects the initial array configurations for games, conditions, and finishes.
+- Refactored `VaultGrid.tsx` to fallback to a generic `🃏` emoji for newly added dynamic games not found in the original dictionary.
+
+---
+
+
 ## [0.4.3] — 2026-08-24 · BUGFIX-05: Responsive Polish & Admin Routing
 
 ### Fixed

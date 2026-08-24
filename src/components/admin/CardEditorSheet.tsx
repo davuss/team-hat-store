@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { X, Upload, Save, Loader2 } from 'lucide-react';
-import { GAMES, GAME_LABELS, CONDITIONS, CARD_STATUSES, FINISHES, LANGUAGES } from '@/types/card';
+import { CARD_STATUSES } from '@/types/card';
+import { getDynamicConfigs } from '@/app/actions/config';
 import Image from 'next/image';
 
 interface CardEditorSheetProps {
@@ -16,13 +17,27 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  
+  // Dynamic Configs
+  const [dynamicGames, setDynamicGames] = useState<string[]>(['Pokémon']);
+  const [dynamicConditions, setDynamicConditions] = useState<string[]>(['Near Mint (NM)']);
+  const [dynamicFinishes, setDynamicFinishes] = useState<string[]>(['Normal']);
+
+  useEffect(() => {
+    getDynamicConfigs().then(data => {
+      setDynamicGames(data.games.length ? data.games : ['Pokémon']);
+      setDynamicConditions(data.conditions.length ? data.conditions : ['Near Mint (NM)']);
+      setDynamicFinishes(data.finishes.length ? data.finishes : ['Normal']);
+    });
+  }, []);
+
   const [formData, setFormData] = useState({
     title: '',
-    game: 'Pokemon',
+    game: 'Pokémon',
     setName: '',
     cardNumber: '',
     rarity: 'Common',
-    condition: 'NM',
+    condition: 'Near Mint (NM)',
     finish: 'Normal',
     language: 'English',
     status: 'AVAILABLE',
@@ -36,11 +51,11 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
     if (cardToEdit) {
       setFormData({
         title: cardToEdit.title || '',
-        game: cardToEdit.game || 'Pokemon',
+        game: cardToEdit.game || 'Pokémon',
         setName: cardToEdit.setName || '',
         cardNumber: cardToEdit.cardNumber || '',
         rarity: cardToEdit.rarity || 'Common',
-        condition: cardToEdit.condition || 'NM',
+        condition: cardToEdit.condition || 'Near Mint (NM)',
         finish: cardToEdit.finish || 'Normal',
         language: cardToEdit.language || 'English',
         status: cardToEdit.status || 'AVAILABLE',
@@ -51,8 +66,8 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
       });
     } else {
       setFormData({
-        title: '', game: 'Pokemon', setName: '', cardNumber: '', rarity: 'Common',
-        condition: 'NM', finish: 'Normal', language: 'English', status: 'AVAILABLE',
+        title: '', game: 'Pokémon', setName: '', cardNumber: '', rarity: 'Common',
+        condition: 'Near Mint (NM)', finish: 'Normal', language: 'English', status: 'AVAILABLE',
         priceSar: '0', stockQty: '1', imageUrl: '', isFeatured: false,
       });
     }
@@ -221,7 +236,7 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Game</label>
                 <select name="game" value={formData.game} onChange={handleChange}
                   style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
-                  {GAMES.map(g => <option key={g} value={g}>{GAME_LABELS[g]}</option>)}
+                  {dynamicGames.map(g => <option key={g} value={g}>{g}</option>)}
                 </select>
               </div>
               <div>
@@ -253,14 +268,14 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Condition</label>
                 <select name="condition" value={formData.condition} onChange={handleChange}
                   style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
-                  {CONDITIONS.map(c => <option key={c} value={c}>{c}</option>)}
+                  {dynamicConditions.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Finish</label>
                 <select name="finish" value={formData.finish} onChange={handleChange}
                   style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
-                  {FINISHES.map(f => <option key={f} value={f}>{f}</option>)}
+                  {dynamicFinishes.map(f => <option key={f} value={f}>{f}</option>)}
                 </select>
               </div>
             </div>
