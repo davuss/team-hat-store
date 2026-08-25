@@ -1,10 +1,11 @@
-'use client';
+
+
 
 import type { Metadata } from 'next';
 import { Target, Search, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/../lib/prisma';
 import { getStoreConfig } from '@/app/actions/config';
 
 // Revalidate occasionally, though it's dynamic by default if cookies/headers are read.
@@ -66,14 +67,7 @@ export default async function WishlistPage() {
               marginTop: '32px', transition: 'all 0.2s',
               boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)'
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(16, 185, 129, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 14px rgba(16, 185, 129, 0.3)';
-            }}
+            className="hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(16,185,129,0.4)]"
           >
             <MessageCircle size={20} />
             Have one? Send a WhatsApp Message

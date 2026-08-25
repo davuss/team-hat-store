@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import prisma from '@/../lib/prisma';
 import AdminWishlistClient from './AdminWishlistClient';
 
 export const revalidate = 0; // Always fresh for admin
