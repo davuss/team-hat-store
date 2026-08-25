@@ -6,6 +6,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.8.4] — 2026-08-25 · BUGFIX-08: Vercel Build Script
+
+### Fixed
+- **Deployment Build Pipeline**: Updated the `"build"` script in `package.json` to `"prisma generate && next build"`. This explicitly generates the Prisma Client before compilation, bypassing Vercel's security block on the `postinstall` hook.
+
+---
+
 ## [0.8.3] — 2026-08-25 · BUGFIX-07: Launcher & Lightbox Z-Index
 
 ### Fixed
