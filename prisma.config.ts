@@ -14,9 +14,8 @@ export default defineConfig({
     seed: 'tsx prisma/seed.ts',
   },
   datasource: {
-    // SQLite local database — portable to PostgreSQL/Supabase
-    // by changing provider in schema.prisma and updating this URL.
-    url: process.env.DATABASE_URL ?? 'file:./prisma/dev.db',
+    // Cloud database (PostgreSQL/Supabase)
+    url: process.env.DATABASE_URL,
   },
 });
 
