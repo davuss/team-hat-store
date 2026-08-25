@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
-import { Plus, Check, Eye, ArrowLeftRight, Lock } from 'lucide-react';
+import { Plus, Check, Eye, ArrowLeftRight, Lock, X } from 'lucide-react';
 import { useCartStore, type CartCard } from '@/store/cartStore';
 
 // ─── Status badge config ──────────────────────────────────────
@@ -42,6 +43,7 @@ interface VaultCardProps {
 
 export default function VaultCard({ card }: VaultCardProps) {
   const { addItem, removeItem, hasItem, openCart } = useCartStore();
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const price = typeof card.priceSar === 'string' ? parseFloat(card.priceSar) : card.priceSar;
   const inCart = hasItem(card.id);
   const statusCfg = STATUS_CONFIG[card.status] ?? STATUS_CONFIG.AVAILABLE;
@@ -116,6 +118,10 @@ export default function VaultCard({ card }: VaultCardProps) {
           aspectRatio: '3/4',
           background: 'var(--card-image-bg)',
           overflow: 'hidden',
+          cursor: card.imageUrl ? 'zoom-in' : 'default',
+        }}
+        onClick={() => {
+          if (card.imageUrl) setIsLightboxOpen(true);
         }}
       >
         {card.imageUrl && (card.imageUrl.startsWith('http') || card.imageUrl.startsWith('/')) ? (
@@ -363,6 +369,68 @@ export default function VaultCard({ card }: VaultCardProps) {
           )}
         </div>
       </div>
+
+      {/* Lightbox Overlay */}
+      {isLightboxOpen && card.imageUrl && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            backgroundColor: 'rgba(0,0,0,0.85)',
+            backdropFilter: 'blur(4px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'zoom-out',
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsLightboxOpen(false);
+          }}
+        >
+          <div
+            style={{
+              position: 'relative',
+              width: '90%',
+              maxWidth: '500px',
+              aspectRatio: '3/4',
+            }}
+          >
+            <Image
+              src={card.imageUrl}
+              alt={card.title}
+              fill
+              style={{ objectFit: 'contain' }}
+              sizes="(max-width: 768px) 90vw, 500px"
+              priority
+            />
+          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsLightboxOpen(false);
+            }}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              background: 'rgba(0,0,0,0.5)',
+              border: 'none',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+          >
+            <X size={24} />
+          </button>
+        </div>
+      )}
     </article>
   );
 }

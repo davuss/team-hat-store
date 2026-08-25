@@ -243,7 +243,11 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Status</label>
                 <select name="status" value={formData.status} onChange={handleChange}
                   style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
-                  {CARD_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+                  {CARD_STATUSES.map(s => (
+                    <option key={s} value={s}>
+                      {s === 'VAULT' ? 'VAULT (Send to Showcase)' : s === 'AVAILABLE' ? 'AVAILABLE (For Sale)' : s}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

@@ -6,7 +6,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.8.1] — 2026-08-25 · BUGFIX-06: Prisma Cache Flush
+## [0.8.2] — 2026-08-25 · PROMPT-12: UX Polish
+
+### Added
+- **Image Lightbox**: Implemented a client-side full-screen image overlay on `VaultCard` to allow users to inspect high-resolution card details.
+
+### Changed
+- **Admin UI Labels**: Updated the display labels in the `CardEditorSheet` dropdown for `VAULT` (to "VAULT (Send to Showcase)") and `AVAILABLE` (to "AVAILABLE (For Sale)") to clarify business logic for operators.
+
+---
 
 ### Fixed
 - **Next.js Turbopack Cache**: Cleared the `.next` directory to purge the stale SQLite `PrismaClient` initialization errors.
