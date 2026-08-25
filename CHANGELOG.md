@@ -6,6 +6,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.8.1] — 2026-08-25 · BUGFIX-06: Prisma Cache Flush
+
+### Fixed
+- **Next.js Turbopack Cache**: Cleared the `.next` directory to purge the stale SQLite `PrismaClient` initialization errors.
+- **Client Regeneration**: Regenerated the Prisma Client explicitly for PostgreSQL to ensure runtime compatibility.
+
+---
+
 ## [0.8.0] — 2026-08-25 · PROMPT-08: Cloud Infrastructure Migration
 
 ### Added
