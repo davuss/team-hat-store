@@ -56,7 +56,7 @@ export default function HomePage() {
         aria-labelledby="features-heading"
         style={{
           padding: '100px 24px',
-          background: '#0f172a',
+          background: 'var(--bg-base)',
           position: 'relative',
         }}
       >
@@ -100,14 +100,14 @@ export default function HomePage() {
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
                 fontWeight: 800,
-                color: '#f1f5f9',
+                color: 'var(--text-primary)',
                 letterSpacing: '-0.03em',
                 marginBottom: '16px',
               }}
             >
               Everything in One Place
             </h2>
-            <p style={{ color: '#64748b', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
               Trade binder, showcase vault, and wishlist — all managed by the Team HAT crew.
             </p>
           </div>
@@ -129,18 +129,18 @@ export default function HomePage() {
                   style={{
                     padding: '32px',
                     borderRadius: '14px',
-                    background: 'rgba(30,41,59,0.4)',
+                    background: 'var(--bg-card)',
                     border: `1px solid ${borderColor}`,
                     backdropFilter: 'blur(10px)',
                     transition: 'all 0.25s ease',
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = hoverBorder;
-                    (e.currentTarget as HTMLElement).style.background = 'rgba(30,41,59,0.7)';
+                    (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = borderColor;
-                    (e.currentTarget as HTMLElement).style.background = 'rgba(30,41,59,0.4)';
+                    (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)';
                   }}
                 >
                   {/* Icon */}
@@ -164,7 +164,7 @@ export default function HomePage() {
                       fontFamily: "'Space Grotesk', sans-serif",
                       fontSize: '1.2rem',
                       fontWeight: 700,
-                      color: '#e2e8f0',
+                      color: 'var(--text-primary)',
                       marginBottom: '12px',
                       letterSpacing: '-0.01em',
                     }}
@@ -172,7 +172,7 @@ export default function HomePage() {
                     {title}
                   </h3>
 
-                  <p style={{ color: '#64748b', lineHeight: 1.7, marginBottom: '24px', fontSize: '0.92rem' }}>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '24px', fontSize: '0.92rem' }}>
                     {description}
                   </p>
 
@@ -212,7 +212,7 @@ export default function HomePage() {
         aria-labelledby="bottom-cta-heading"
         style={{
           padding: '80px 24px',
-          background: '#020617',
+          background: 'var(--bg-surface)',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
@@ -233,7 +233,7 @@ export default function HomePage() {
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)',
               fontWeight: 800,
-              color: '#f1f5f9',
+              color: 'var(--text-primary)',
               letterSpacing: '-0.03em',
               marginBottom: '16px',
             }}
@@ -250,7 +250,7 @@ export default function HomePage() {
               Deal?
             </span>
           </h2>
-          <p style={{ color: '#64748b', marginBottom: '32px', fontSize: '1rem' }}>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '32px', fontSize: '1rem' }}>
             All prices in Saudi Riyal (SAR). DM us on socials to arrange trades.
           </p>
           <a

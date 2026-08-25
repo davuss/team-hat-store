@@ -140,7 +140,7 @@ export default function HeroSection() {
             fontWeight: 800,
             lineHeight: 1.1,
             marginBottom: '20px',
-            color: '#f1f5f9',
+            color: 'var(--text-primary)',
             letterSpacing: '-0.03em',
           }}
         >
@@ -172,7 +172,7 @@ export default function HeroSection() {
         <p
           style={{
             fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-            color: '#94a3b8',
+            color: 'var(--text-secondary)',
             lineHeight: 1.7,
             marginBottom: '40px',
             maxWidth: '580px',
@@ -237,11 +237,11 @@ export default function HeroSection() {
               padding: '13px 32px',
               borderRadius: '9px',
               background: 'transparent',
-              color: '#cbd5e1',
+              color: 'var(--text-primary)',
               textDecoration: 'none',
               fontSize: '1rem',
               fontWeight: 600,
-              border: '1px solid rgba(71,85,105,0.7)',
+              border: '1px solid var(--border-default)',
               transition: 'all 0.25s ease',
               letterSpacing: '0.01em',
             }}
@@ -252,8 +252,8 @@ export default function HeroSection() {
               (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(71,85,105,0.7)';
-              (e.currentTarget as HTMLElement).style.color = '#cbd5e1';
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+              (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
               (e.currentTarget as HTMLElement).style.background = 'transparent';
               (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
             }}
@@ -281,10 +281,11 @@ export default function HeroSection() {
                 borderRadius: '9999px',
                 fontSize: '0.75rem',
                 fontWeight: 600,
-                color,
-                background: bg,
-                border: `1px solid ${color}30`,
+                color: 'var(--text-primary)',
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
                 letterSpacing: '0.03em',
+                boxShadow: `inset 2px 0 0 ${color}`,
               }}
             >
               {label}
@@ -352,7 +353,7 @@ export default function HeroSection() {
               >
                 {value}
               </span>
-              <span style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                 {label}
               </span>
             </div>

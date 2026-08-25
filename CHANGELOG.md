@@ -6,6 +6,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.8.5] — 2026-08-25 · BUGFIX-09: Light Theme Contrast & Readability
+
+### Fixed
+- **Homepage Contrast**: Replaced hardcoded white and gray typography hex codes in `HeroSection.tsx` and `page.tsx` with dynamic CSS variables (`var(--text-primary)`, `var(--text-secondary)`, `var(--bg-elevated)`, etc.) to ensure complete readability across both light and dark modes.
+
+---
+
 ## [0.8.4] — 2026-08-25 · BUGFIX-08: Vercel Build Script
 
 ### Fixed
