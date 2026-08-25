@@ -6,6 +6,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.9.1] — 2026-08-25 · PROMPT-12: Showroom Crash Fix & Data Enrichment
+
+### Fixed
+- **Showroom 500 Error**: Fixed a critical Next.js server crash in `/vault/[id]/page.tsx` caused by an unawaited dynamic route `params` Promise.
+
+### Added
+- **Card Data Enrichment**: Added `description` to the Prisma schema for detailed condition notes and lore.
+- **Admin Editor Update**: Updated `CardEditorSheet.tsx` to include fields for `description` and `language`.
+- **Showroom Typography**: The Showroom page now dynamically renders the `description` with premium typography and a branded accent border.
+
+---
+
 ## [0.9.0] — 2026-08-25 · PROMPT-10: Showroom Details & Dynamic Wishlist
 
 ### Added

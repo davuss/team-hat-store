@@ -22,6 +22,7 @@ model Card {
   id         String   @id @default(cuid())
   slug       String   @unique
   title      String
+  description String?
 
   // Game: "Pokemon" | "OnePiece" | "Lorcana" | "Topps" | "Riftbound" | "Merch"
   game       String   @default("Pokemon")

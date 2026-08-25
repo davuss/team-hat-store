@@ -8,14 +8,16 @@ import AddToCartButton from './AddToCartButton';
 export const revalidate = 60;
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function ShowroomDetailsPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  
   const card = await prisma.card.findUnique({
-    where: { id: params.id },
+    where: { id: resolvedParams.id },
   });
 
   if (!card) {
@@ -110,9 +112,24 @@ export default async function ShowroomDetailsPage({ params }: PageProps) {
               {card.title}
             </h1>
 
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--hat-green-400)', marginBottom: '32px' }}>
+            <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--hat-green-400)', marginBottom: '24px' }}>
               {price.toFixed(2)} <span style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>SAR</span>
             </div>
+
+            {card.description && (
+              <p style={{
+                color: 'var(--text-secondary)',
+                fontSize: '1.05rem',
+                lineHeight: 1.6,
+                marginBottom: '32px',
+                padding: '16px',
+                background: 'var(--bg-elevated)',
+                borderRadius: '12px',
+                borderLeft: '4px solid var(--hat-green-500)',
+              }}>
+                {card.description}
+              </p>
+            )}
 
             {/* Grid of properties */}
             <div style={{

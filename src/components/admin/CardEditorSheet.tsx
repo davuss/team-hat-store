@@ -33,6 +33,7 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
 
   const [formData, setFormData] = useState({
     title: '',
+    description: '',
     game: 'Pokémon',
     setName: '',
     cardNumber: '',
@@ -51,6 +52,7 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
     if (cardToEdit) {
       setFormData({
         title: cardToEdit.title || '',
+        description: cardToEdit.description || '',
         game: cardToEdit.game || 'Pokémon',
         setName: cardToEdit.setName || '',
         cardNumber: cardToEdit.cardNumber || '',
@@ -66,7 +68,7 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
       });
     } else {
       setFormData({
-        title: '', game: 'Pokémon', setName: '', cardNumber: '', rarity: 'Common',
+        title: '', description: '', game: 'Pokémon', setName: '', cardNumber: '', rarity: 'Common',
         condition: 'Near Mint (NM)', finish: 'Normal', language: 'English', status: 'AVAILABLE',
         priceSar: '0', stockQty: '1', imageUrl: '', isFeatured: false,
       });
@@ -230,6 +232,12 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
               <input required type="text" name="title" value={formData.title} onChange={handleChange}
                 style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }} />
             </div>
+
+            <div>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Description / Notes</label>
+              <textarea name="description" value={formData.description} onChange={(e) => handleChange(e as any)} rows={3}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)', resize: 'vertical' }} />
+            </div>
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div>
@@ -276,11 +284,28 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
                 </select>
               </div>
               <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Language</label>
+                <select name="language" value={formData.language} onChange={handleChange}
+                  style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
+                  <option value="English">English</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Arabic">Arabic</option>
+                </select>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Finish</label>
                 <select name="finish" value={formData.finish} onChange={handleChange}
                   style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
                   {dynamicFinishes.map(f => <option key={f} value={f}>{f}</option>)}
                 </select>
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Rarity</label>
+                <input type="text" name="rarity" value={formData.rarity} onChange={handleChange}
+                  style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }} />
               </div>
             </div>
 
