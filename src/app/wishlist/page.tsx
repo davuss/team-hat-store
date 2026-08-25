@@ -4,41 +4,27 @@ import type { Metadata } from 'next';
 import { Target, Search, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
+import { prisma } from '@/lib/prisma';
+import { getStoreConfig } from '@/app/actions/config';
 
-const BOUNTIES = [
-  {
-    id: 1,
-    title: 'Any Graded Base Set Charizard',
-    priority: 'High Priority',
-    priorityColor: '#ef4444',
-    game: 'Pokémon TCG',
-    action: 'Will pay cash / High-end trade',
-    image: 'https://images.pokemontcg.io/base1/4_hires.png',
-  },
-  {
-    id: 2,
-    title: 'One Piece Manga Rare Zoro',
-    priority: 'Medium Priority',
-    priorityColor: '#f59e0b',
-    game: 'One Piece CG',
-    action: 'Trade Available',
-    image: 'https://en.onepiece-cardgame.com/images/cardlist/card/OP06-118_p1.png',
-  },
-  {
-    id: 3,
-    title: 'Lorcana Enchanted Tinker Bell',
-    priority: 'Wanted',
-    priorityColor: '#3b82f6',
-    game: 'Disney Lorcana',
-    action: 'Will pay cash',
-    image: 'https://sixfortyfive.com/wp-content/uploads/2023/08/Tinker-Bell-Enchanted.jpg',
-  },
-];
+// Revalidate occasionally, though it's dynamic by default if cookies/headers are read.
+export const revalidate = 60;
 
-export default function WishlistPage() {
-  const WHATSAPP_NUMBER = '966500000000'; // Fallback
+function getPriorityColor(priority: string) {
+  const p = priority.toLowerCase();
+  if (p.includes('high')) return 'var(--hat-red-500, #ef4444)';
+  if (p.includes('medium')) return 'var(--hat-orange-500, #f59e0b)';
+  return 'var(--hat-blue-500, #3b82f6)';
+}
+
+export default async function WishlistPage() {
+  const WHATSAPP_NUMBER = await getStoreConfig('config_whatsapp') || '+966000000000';
+  const bounties = await prisma.wishlistItem.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+
   const message = encodeURIComponent('Hello Team HAT! I have a card from your Bounty Board and I want to trade/sell it.');
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, '')}?text=${message}`;
 
   return (
     <div className="w-full bg-[var(--bg-base)]">
@@ -96,7 +82,7 @@ export default function WishlistPage() {
 
         {/* Bounties Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {BOUNTIES.map((bounty) => (
+          {bounties.map((bounty) => (
             <div key={bounty.id} style={{
               background: 'var(--bg-surface)',
               border: '1px solid var(--border-default)',
@@ -106,16 +92,20 @@ export default function WishlistPage() {
               flexDirection: 'column'
             }}>
               <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', background: 'var(--bg-elevated)' }}>
-                <Image
-                  src={bounty.image}
-                  alt={bounty.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
+                {bounty.imageUrl ? (
+                  <Image
+                    src={bounty.imageUrl}
+                    alt={bounty.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 100vw, 320px"
+                  />
+                ) : (
+                  <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>No Image</div>
+                )}
                 <div style={{
                   position: 'absolute', top: '16px', right: '16px',
-                  background: bounty.priorityColor, color: '#fff',
+                  background: getPriorityColor(bounty.priority), color: '#fff',
                   padding: '6px 12px', borderRadius: '8px',
                   fontSize: '0.8rem', fontWeight: 700,
                   boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
@@ -134,11 +124,16 @@ export default function WishlistPage() {
                 
                 <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--hat-green-400)', fontWeight: 600 }}>
                   <Search size={16} />
-                  {bounty.action}
+                  {bounty.rewardText}
                 </div>
               </div>
             </div>
           ))}
+          {bounties.length === 0 && (
+            <div style={{ gridColumn: '1 / -1', padding: '64px', textAlign: 'center', color: 'var(--text-muted)', background: 'var(--bg-surface)', borderRadius: '16px', border: '1px solid var(--border-default)' }}>
+              No bounties actively hunted right now. Check back soon!
+            </div>
+          )}
         </div>
       </div>
     </div>

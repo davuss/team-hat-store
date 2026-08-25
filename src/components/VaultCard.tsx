@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Plus, Check, Eye, ArrowLeftRight, Lock, X } from 'lucide-react';
 import { useCartStore, type CartCard } from '@/store/cartStore';
 
@@ -212,22 +213,26 @@ export default function VaultCard({ card }: VaultCardProps) {
         </div>
 
         {/* Title */}
-        <h3
-          style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: '0.95rem',
-            fontWeight: 700,
-            color: 'var(--text-primary)',
-            margin: 0,
-            lineHeight: 1.3,
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          {card.title}
-        </h3>
+        <Link href={`/vault/${card.id}`} style={{ textDecoration: 'none' }}>
+          <h3
+            style={{
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontSize: '0.95rem',
+              fontWeight: 700,
+              color: 'var(--text-primary)',
+              margin: 0,
+              lineHeight: 1.3,
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              transition: 'color 0.2s',
+            }}
+            className="hover:text-[var(--hat-green-400)]"
+          >
+            {card.title}
+          </h3>
+        </Link>
 
         {/* Set + condition meta */}
         <p style={{ fontSize: '0.73rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.4 }}>

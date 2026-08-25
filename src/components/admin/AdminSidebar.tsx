@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Package, Settings, ExternalLink } from 'lucide-react';
+import { LayoutDashboard, Package, Settings, ExternalLink, Target } from 'lucide-react';
 import LogoutButton from './LogoutButton';
 
 const NAV_ITEMS = [
   { href: '/admin', label: 'Overview', icon: LayoutDashboard },
   { href: '/admin/inventory', label: 'Inventory', icon: Package },
+  { href: '/admin/wishlist', label: 'Wishlist', icon: Target },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 

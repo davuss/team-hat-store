@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.9.0] — 2026-08-25 · PROMPT-10: Showroom Details & Dynamic Wishlist
+
+### Added
+- **Showroom Details Route**: Built the `/vault/[id]` dynamic route allowing users to view high-resolution images and metadata for specific inventory items. Refactored `VaultCard.tsx` to link to this new route.
+- **Dynamic Bounty Board**: Expanded the Prisma schema with a new `WishlistItem` model (pushed to production). 
+- **Admin Wishlist Manager**: Created the `/admin/wishlist` CRUD interface with a slide-out editor and Cloudinary image upload for managing active bounties.
+- **Live Wishlist Refactor**: Updated the public `/wishlist` page to fetch live database records instead of rendering static placeholders, removing hardcoded hex colors for dynamic theme mapping.
+
+---
+
 ## [0.8.5] — 2026-08-25 · BUGFIX-09: Light Theme Contrast & Readability
 
 ### Fixed
