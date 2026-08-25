@@ -6,6 +6,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.8.3] — 2026-08-25 · BUGFIX-07: Launcher & Lightbox Z-Index
+
+### Fixed
+- **Database Reset Bug**: Stripped `db:push` and `db:seed` logic from `launch_store.bat` to prevent the cloud Supabase database from being wiped on every dev server restart.
+- **Lightbox Stacking Context**: Implemented React `createPortal` in `VaultCard.tsx` to mount the image lightbox directly to `document.body`, allowing it to break out of CSS `transform`/`overflow` constraints and render truly full-screen.
+
+---
+
 ## [0.8.2] — 2026-08-25 · PROMPT-12: UX Polish
 
 ### Added

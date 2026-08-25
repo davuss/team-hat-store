@@ -24,25 +24,7 @@ echo.
 REM Navigate to the project directory (same folder as this script)
 cd /d "%~dp0"
 
-REM Check if node_modules exists
-if not exist "node_modules\" (
-    echo  [!] node_modules not found. Running npm install first...
-    echo.
-    call npm install
-    echo.
-)
 
-REM Check if database exists; if not, push schema and seed
-if not exist "prisma\dev.db" (
-    echo  [!] Database not found. Setting up database...
-    echo.
-    call npx prisma db push
-    echo.
-    echo  [!] Seeding database with sample inventory...
-    echo.
-    call npm run db:seed
-    echo.
-)
 
 echo  [✓] Starting Next.js dev server...
 echo  [✓] The store will open in your browser in 3 seconds.

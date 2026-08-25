@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { Plus, Check, Eye, ArrowLeftRight, Lock, X } from 'lucide-react';
 import { useCartStore, type CartCard } from '@/store/cartStore';
@@ -44,6 +45,12 @@ interface VaultCardProps {
 export default function VaultCard({ card }: VaultCardProps) {
   const { addItem, removeItem, hasItem, openCart } = useCartStore();
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const price = typeof card.priceSar === 'string' ? parseFloat(card.priceSar) : card.priceSar;
   const inCart = hasItem(card.id);
   const statusCfg = STATUS_CONFIG[card.status] ?? STATUS_CONFIG.AVAILABLE;
@@ -371,7 +378,7 @@ export default function VaultCard({ card }: VaultCardProps) {
       </div>
 
       {/* Lightbox Overlay */}
-      {isLightboxOpen && card.imageUrl && (
+      {mounted && isLightboxOpen && card.imageUrl && createPortal(
         <div
           style={{
             position: 'fixed',
@@ -429,7 +436,8 @@ export default function VaultCard({ card }: VaultCardProps) {
           >
             <X size={24} />
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </article>
   );
