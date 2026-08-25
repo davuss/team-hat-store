@@ -12,8 +12,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  // NOTE: url moved to prisma.config.ts (Prisma 7 requirement)
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // ============================================================

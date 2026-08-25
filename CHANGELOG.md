@@ -6,6 +6,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.8.0] — 2026-08-25 · PROMPT-08: Cloud Infrastructure Migration
+
+### Added
+- **Cloudinary Integration**: Installed `cloudinary` and replaced local file system image uploads with direct-to-cloud streams in the `/api/upload` route.
+- **Environment Template**: Created `.env.example` detailing the required keys for PostgreSQL, Cloudinary, and the Admin PIN.
+- **Image Optimization**: Whitelisted `res.cloudinary.com` in `next.config.ts`.
+
+### Changed
+- **Database Architecture**: Swapped Prisma provider from `"sqlite"` to `"postgresql"`.
+- **Prisma Client**: Removed `@prisma/adapter-better-sqlite3` and reverted to standard database connection pooling in `src/lib/prisma.ts` and `prisma/seed.ts`.
+
+### Removed
+- Deleted local SQLite database (`dev.db`, `dev.db-journal`).
+- Uninstalled `better-sqlite3` and `@prisma/adapter-better-sqlite3`.
+
+---
+
+
 ## [0.7.0] — 2026-08-24 · PROMPT-07: The Communication Switchboard
 
 ### Added

@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configure cloudinary with environment variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,20 +20,19 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Make filename safe and unique
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const filename = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    const safeFilename = `${uniqueSuffix}-${filename}`;
+    // Upload to Cloudinary using a stream
+    const uploadResult = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { folder: 'teamhat/cards' },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      );
+      uploadStream.end(buffer);
+    });
 
-    const uploadDir = join(process.cwd(), 'public', 'uploads', 'cards');
-    
-    // Ensure directory exists
-    await mkdir(uploadDir, { recursive: true });
-
-    const filepath = join(uploadDir, safeFilename);
-    await writeFile(filepath, buffer);
-
-    const fileUrl = `/uploads/cards/${safeFilename}`;
+    const fileUrl = (uploadResult as any).secure_url;
 
     return NextResponse.json({ success: true, url: fileUrl });
   } catch (error) {

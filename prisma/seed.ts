@@ -6,19 +6,9 @@
 // ============================================================
 
 import 'dotenv/config';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { PrismaClient } from '@prisma/client';
-import path from 'path';
 
-// Resolve DB path
-const DB_URL = process.env.DATABASE_URL ?? 'file:./prisma/dev.db';
-const dbPath = DB_URL.replace(/^file:/, '');
-const absoluteDbPath = path.isAbsolute(dbPath)
-  ? dbPath
-  : path.join(process.cwd(), dbPath);
-
-const adapter = new PrismaBetterSqlite3({ url: `file:${absoluteDbPath}` });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient();
 
 async function main() {
   console.log('🌱 Seeding Team HAT Cardhouse database...\n');

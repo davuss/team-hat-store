@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.pokemontcg.io' },
       { protocol: 'https', hostname: 'en.onepiece-cardgame.com' },
       { protocol: 'https', hostname: 'sixfortyfive.com' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
     ],
   },
 };
