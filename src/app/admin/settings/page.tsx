@@ -8,6 +8,7 @@ export default function SettingsPage() {
   const [games, setGames] = useState<string[]>([]);
   const [conditions, setConditions] = useState<string[]>([]);
   const [finishes, setFinishes] = useState<string[]>([]);
+  const [rarities, setRarities] = useState<string[]>([]);
   const [whatsapp, setWhatsapp] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -20,6 +21,7 @@ export default function SettingsPage() {
       setGames(dynamicData.games);
       setConditions(dynamicData.conditions);
       setFinishes(dynamicData.finishes);
+      setRarities(dynamicData.rarities || []);
       setWhatsapp(waData);
       setLoading(false);
     });
@@ -31,6 +33,7 @@ export default function SettingsPage() {
       updateDynamicConfig('config_games', games),
       updateDynamicConfig('config_conditions', conditions),
       updateDynamicConfig('config_finishes', finishes),
+      updateDynamicConfig('config_rarities', rarities),
       updateStoreConfig('config_whatsapp', whatsapp),
     ]);
     setSaving(false);
@@ -75,6 +78,7 @@ export default function SettingsPage() {
 
         <ConfigSection title="Game Categories" items={games} setItems={setGames} placeholder="e.g. Flesh & Blood" />
         <ConfigSection title="Card Conditions" items={conditions} setItems={setConditions} placeholder="e.g. Played" />
+        <ConfigSection title="Card Rarities" items={rarities} setItems={setRarities} placeholder="e.g. Secret Rare" />
         <ConfigSection title="Foil & Finishes" items={finishes} setItems={setFinishes} placeholder="e.g. Cold Foil" />
       </div>
     </div>

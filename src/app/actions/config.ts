@@ -7,7 +7,7 @@ export async function getDynamicConfigs() {
   const configs = await prisma.systemConfig.findMany({
     where: {
       key: {
-        in: ['config_games', 'config_conditions', 'config_finishes'],
+        in: ['config_games', 'config_conditions', 'config_finishes', 'config_rarities'],
       },
     },
   });
@@ -16,6 +16,7 @@ export async function getDynamicConfigs() {
     games: [] as string[],
     conditions: [] as string[],
     finishes: [] as string[],
+    rarities: [] as string[],
   };
 
   configs.forEach((c: any) => {
@@ -23,6 +24,7 @@ export async function getDynamicConfigs() {
       if (c.key === 'config_games') parsed.games = JSON.parse(c.value);
       if (c.key === 'config_conditions') parsed.conditions = JSON.parse(c.value);
       if (c.key === 'config_finishes') parsed.finishes = JSON.parse(c.value);
+      if (c.key === 'config_rarities') parsed.rarities = JSON.parse(c.value);
     } catch (e) {
       console.error(`Error parsing JSON for ${c.key}:`, e);
     }
@@ -31,7 +33,7 @@ export async function getDynamicConfigs() {
   return parsed;
 }
 
-export async function updateDynamicConfig(key: 'config_games' | 'config_conditions' | 'config_finishes', values: string[]) {
+export async function updateDynamicConfig(key: 'config_games' | 'config_conditions' | 'config_finishes' | 'config_rarities', values: string[]) {
   await prisma.systemConfig.upsert({
     where: { key },
     update: { value: JSON.stringify(values) },

@@ -6,6 +6,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.9.2] — 2026-08-25 · PROMPT-13: Database Seed: Standardized TCG Config
+
+### Added
+- **Dynamic Config Seed**: Wrote a Prisma script and seeded `config_rarities` and `config_finishes` directly to the production database with standardized arrays for Pokémon, One Piece, Lorcana, and Topps.
+- **Dynamic Rarities UI**: Rarity is no longer a plain text input. It's now a dropdown menu dynamically populated by `config_rarities`, alongside Finishes.
+- **Settings UI Update**: The `/admin/settings` page now includes a "Card Rarities" section for Chloe to manage the dropdown arrays without writing code.
+
+---
+
 ## [0.9.1] — 2026-08-25 · PROMPT-12: Showroom Crash Fix & Data Enrichment
 
 ### Fixed

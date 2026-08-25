@@ -19,15 +19,19 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
   const [uploading, setUploading] = useState(false);
   
   // Dynamic Configs
-  const [dynamicGames, setDynamicGames] = useState<string[]>(['Pokémon']);
-  const [dynamicConditions, setDynamicConditions] = useState<string[]>(['Near Mint (NM)']);
-  const [dynamicFinishes, setDynamicFinishes] = useState<string[]>(['Normal']);
+  const [dynamicGames, setDynamicGames] = useState<string[]>(['Pokémon', 'One Piece', 'Lorcana', 'Topps']);
+  const [dynamicConditions, setDynamicConditions] = useState<string[]>(['Near Mint (NM)', 'Lightly Played (LP)', 'Moderately Played (MP)', 'Graded']);
+  const [dynamicFinishes, setDynamicFinishes] = useState<string[]>(['Normal', 'Holo', 'Reverse Holo']);
+  const [dynamicRarities, setDynamicRarities] = useState<string[]>(['Common', 'Uncommon', 'Rare']);
 
   useEffect(() => {
     getDynamicConfigs().then(data => {
-      setDynamicGames(data.games.length ? data.games : ['Pokémon']);
+      setDynamicGames(data.games.length ? data.games : ['Pokémon', 'One Piece', 'Lorcana']);
       setDynamicConditions(data.conditions.length ? data.conditions : ['Near Mint (NM)']);
       setDynamicFinishes(data.finishes.length ? data.finishes : ['Normal']);
+      if (data.rarities && data.rarities.length) {
+        setDynamicRarities(data.rarities);
+      }
     });
   }, []);
 
@@ -304,8 +308,10 @@ export default function CardEditorSheet({ isOpen, onClose, cardToEdit }: CardEdi
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Rarity</label>
-                <input type="text" name="rarity" value={formData.rarity} onChange={handleChange}
-                  style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }} />
+                <select name="rarity" value={formData.rarity} onChange={handleChange}
+                  style={{ width: '100%', padding: '10px 12px', borderRadius: '6px', background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
+                  {dynamicRarities.map(r => <option key={r} value={r}>{r}</option>)}
+                </select>
               </div>
             </div>
 
