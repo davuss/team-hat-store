@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.9.3] — 2026-08-26 · PROMPT-18: UI Audit & Light Theme Accessibility
+
+### Changed
+- **Light Theme Contrast**: Overhauled the Hero Section to meet accessibility standards in Light Mode.
+- **Typography Updates**: Converted the "Card Vault" gradient and Game Pill accents to deep amber/emerald in light mode (retaining bright yellows/pastels for dark mode). Increased body text contrast.
+- **Component Elevation**: The Stats bar and Secondary CTA button now feature distinct borders, drop shadows, and standard Tailwind hover states for better tactile response in Light Mode.
+- **Decorative Elements**: Removed the frosted glass decorative squares in Light Mode to reduce visual clutter, preserving them only in Dark Mode (`hidden dark:block`).
+
+---
+
 ## [0.9.2] — 2026-08-25 · PROMPT-13: Database Seed: Standardized TCG Config
 
 ### Added

@@ -3,12 +3,12 @@
 import { ArrowRight, Layers, Star, TrendingUp, Shield, Zap } from 'lucide-react';
 
 const GAME_PILLS = [
-  { label: 'Pokémon TCG',         color: '#fbbf24', bg: 'rgba(251,191,36,0.12)'   },
-  { label: 'One Piece TCG',        color: '#f87171', bg: 'rgba(248,113,113,0.12)'  },
-  { label: 'Disney Lorcana',       color: '#a78bfa', bg: 'rgba(167,139,250,0.12)'  },
-  { label: 'Topps Premier League', color: '#34d399', bg: 'rgba(52,211,153,0.12)'   },
-  { label: 'LoL Riftbound',        color: '#60a5fa', bg: 'rgba(96,165,250,0.12)'   },
-  { label: 'Team HAT Merch',       color: '#fcd34d', bg: 'rgba(252,211,77,0.12)'   },
+  { label: 'Pokémon TCG',         className: 'border-amber-500 text-amber-700 dark:text-yellow-400 dark:border-yellow-400/30' },
+  { label: 'One Piece TCG',        className: 'border-red-600 text-red-700 dark:text-red-400 dark:border-red-400/30' },
+  { label: 'Disney Lorcana',       className: 'border-purple-600 text-purple-700 dark:text-purple-400 dark:border-purple-400/30' },
+  { label: 'Topps Premier League', className: 'border-emerald-600 text-emerald-700 dark:text-emerald-400 dark:border-emerald-400/30' },
+  { label: 'LoL Riftbound',        className: 'border-blue-600 text-blue-700 dark:text-blue-400 dark:border-blue-400/30' },
+  { label: 'Team HAT Merch',       className: 'border-amber-600 text-amber-700 dark:text-yellow-400 dark:border-yellow-400/30' },
 ];
 
 const STATS = [
@@ -70,6 +70,7 @@ export default function HeroSection() {
         <div
           key={i}
           aria-hidden="true"
+          className="hidden dark:block"
           style={{
             position: 'absolute',
             top: card.top,
@@ -157,12 +158,7 @@ export default function HeroSection() {
           </span>
           <br />
           <span
-            style={{
-              background: 'linear-gradient(135deg, #fbbf24, #fcd34d)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
+            className="bg-clip-text text-transparent bg-gradient-to-br from-amber-600 to-amber-500 dark:from-yellow-400 dark:to-yellow-300"
           >
             Card Vault
           </span>
@@ -170,9 +166,9 @@ export default function HeroSection() {
 
         {/* Sub-headline */}
         <p
+          className="text-slate-600 dark:text-slate-300"
           style={{
             fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-            color: 'var(--text-secondary)',
             lineHeight: 1.7,
             marginBottom: '40px',
             maxWidth: '580px',
@@ -230,33 +226,8 @@ export default function HeroSection() {
           <a
             href="/showcase"
             id="hero-cta-secondary"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '13px 32px',
-              borderRadius: '9px',
-              background: 'transparent',
-              color: 'var(--text-primary)',
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: 600,
-              border: '1px solid var(--border-default)',
-              transition: 'all 0.25s ease',
-              letterSpacing: '0.01em',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = '#047857';
-              (e.currentTarget as HTMLElement).style.color = '#34d399';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(6,78,59,0.15)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-              (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-              (e.currentTarget as HTMLElement).style.background = 'transparent';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-            }}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[9px] text-slate-700 dark:text-[var(--text-primary)] font-semibold border border-slate-300 dark:border-[var(--border-default)] shadow-sm dark:shadow-none transition-all duration-250 bg-white dark:bg-transparent hover:border-emerald-600 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/15 hover:-translate-y-0.5"
+            style={{ letterSpacing: '0.01em' }}
           >
             View Showcase
           </a>
@@ -273,20 +244,11 @@ export default function HeroSection() {
             marginBottom: '64px',
           }}
         >
-          {GAME_PILLS.map(({ label, color, bg }) => (
+          {GAME_PILLS.map(({ label, className }) => (
             <span
               key={label}
-              style={{
-                padding: '5px 13px',
-                borderRadius: '9999px',
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                background: 'var(--bg-elevated)',
-                border: '1px solid var(--border-default)',
-                letterSpacing: '0.03em',
-                boxShadow: `inset 2px 0 0 ${color}`,
-              }}
+              className={`px-3.5 py-1.5 text-xs font-semibold rounded-full border bg-white dark:bg-[var(--bg-elevated)] shadow-sm dark:shadow-none ${className}`}
+              style={{ letterSpacing: '0.03em' }}
             >
               {label}
             </span>
@@ -307,36 +269,12 @@ export default function HeroSection() {
         }}
       >
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-            gap: '1px',
-            background: 'var(--border-default)',
-            border: '1px solid var(--border-default)',
-            borderRadius: '14px',
-            overflow: 'hidden',
-            backdropFilter: 'blur(12px)',
-          }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-slate-200 dark:bg-[var(--border-default)] border border-slate-200 dark:border-[var(--border-default)] shadow-md dark:shadow-none rounded-[14px] overflow-hidden backdrop-blur-md"
         >
           {STATS.map(({ icon: Icon, value, label }, i) => (
             <div
               key={i}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                padding: '24px 20px',
-                background: 'var(--bg-card)',
-                transition: 'background 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)';
-              }}
+              className="flex flex-col items-center justify-center gap-2 py-6 px-5 bg-white dark:bg-[var(--bg-card)] hover:bg-slate-50 dark:hover:bg-[var(--bg-elevated)] transition-colors duration-200"
             >
               <Icon size={22} color="#10b981" strokeWidth={2} />
               <span
