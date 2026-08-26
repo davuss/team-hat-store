@@ -6,6 +6,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.9.4] — 2026-08-26 · BUGFIX-10: Light Theme Persistence & Class Audit
+
+### Fixed
+- **Tailwind v4 Dark Variant**: Added `@custom-variant dark (&:is(.dark *));` to `globals.css`. Tailwind v4 dropped default support for class-based dark variants, causing all `dark:` utility modifiers to fail on the live DOM.
+- **Theme Provider Attribute**: Changed `next-themes` ThemeProvider from `attribute="data-theme"` to `attribute="class"` to ensure the `<html>` tag injects `.dark` class, correctly triggering the new Tailwind custom variant.
+
+---
+
 ## [0.9.3] — 2026-08-26 · PROMPT-18: UI Audit & Light Theme Accessibility
 
 ### Changed
